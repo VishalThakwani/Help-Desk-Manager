@@ -118,7 +118,7 @@ namespace HelpDesk.Tests
         }
 
         [Fact]
-        public async Task CreateTicket_ReturnsOkResult_WhenTicketIsCreatedSuccessfully()
+        public async Task CreateTicket_ReturnsOkResult_WhenTicketsCreatedSuccessfully()
         {
             // Arrange
             var ticket = new Ticket
@@ -150,7 +150,7 @@ namespace HelpDesk.Tests
         }
 
         [Fact]
-        public async Task CreateTicket_ReturnsBadRequest_WhenTicketIsNull()
+        public async Task CreateTicket_ReturnsBadRequest_WhenTicketsNull()
         {
             // Arrange
             Ticket ticket = null!;
