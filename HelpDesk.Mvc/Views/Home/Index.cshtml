@@ -1,0 +1,234 @@
+﻿@model HelpDesk.Mvc.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="fade-in">
+
+    <!-- Header -->
+    <div class="card mb-4">
+        <div class="card-body p-4">
+
+            <h2 class="fw-bold mb-2">
+                👋 Welcome Back, Vishal
+            </h2>
+
+            <p class="text-muted mb-0">
+                Monitor and manage your Help Desk tickets from one place.
+            </p>
+
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row g-4 mb-4">
+
+        <div class="col-md-4">
+            <a asp-controller="Ticket"
+               asp-action="Index"
+               class="text-decoration-none">
+
+                <div class="dashboard-card text-center">
+
+                    <i class="bi bi-ticket-perforated display-5 text-primary"></i>
+
+                    <div class="dashboard-number mt-3">
+                        @Model.TotalTickets
+                    </div>
+
+                    <div class="dashboard-title">
+                        Total Tickets
+                    </div>
+
+                </div>
+
+            </a>
+        </div>
+
+        <div class="col-md-4">
+
+            <a asp-controller="Ticket"
+               asp-action="Filter"
+               asp-route-status="Open"
+               class="text-decoration-none">
+
+                <div class="dashboard-card text-center">
+
+                    <i class="bi bi-folder2-open display-5 text-success"></i>
+
+                    <div class="dashboard-number mt-3">
+                        @Model.OpenTickets
+                    </div>
+
+                    <div class="dashboard-title">
+                        Open Tickets
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <a asp-controller="Ticket"
+               asp-action="Filter"
+               asp-route-status="Closed"
+               class="text-decoration-none">
+
+                <div class="dashboard-card text-center">
+
+                    <i class="bi bi-check-circle display-5 text-danger"></i>
+
+                    <div class="dashboard-number mt-3">
+                        @Model.ClosedTickets
+                    </div>
+
+                    <div class="dashboard-title">
+                        Closed Tickets
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Quick Actions -->
+
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+            <h4 class="fw-bold mb-4">
+                ⚡ Quick Actions
+            </h4>
+
+            <div class="d-flex flex-wrap gap-3">
+
+                <a asp-controller="Ticket"
+                   asp-action="Create"
+                   class="btn btn-primary btn-lg">
+
+                    <i class="bi bi-plus-circle"></i>
+
+                    Raise New Ticket
+
+                </a>
+
+                <a asp-controller="Ticket"
+                   asp-action="Index"
+                   class="btn btn-outline-primary btn-lg">
+
+                    <i class="bi bi-ticket-perforated"></i>
+
+                    View All Tickets
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Recent Tickets -->
+
+    <div class="card">
+
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between align-items-center mb-3">
+
+                <h4 class="fw-bold">
+                    📋 Recent Tickets
+                </h4>
+
+                <a asp-controller="Ticket"
+                   asp-action="Index"
+                   class="btn btn-sm btn-outline-primary">
+
+                    View All
+
+                </a>
+
+            </div>
+
+            <table class="table table-hover align-middle">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Title</th>
+
+                        <th>Raised By</th>
+
+                        <th>Status</th>
+
+                        <th>Priority</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model.RecentTickets)
+                    {
+                        <tr>
+
+                            <td>@item.Id</td>
+
+                            <td>@item.Title</td>
+
+                            <td>@item.RaisedBy</td>
+
+                            <td>
+
+                                @if (item.Status == "Open")
+                                {
+                                    <span class="status-open">Open</span>
+                                }
+                                else
+                                {
+                                    <span class="status-closed">Closed</span>
+                                }
+
+                            </td>
+
+                            <td>
+
+                                @if (item.Priority == "High")
+                                {
+                                    <span class="priority-high">High</span>
+                                }
+                                else if (item.Priority == "Medium")
+                                {
+                                    <span class="priority-medium">Medium</span>
+                                }
+                                else
+                                {
+                                    <span class="priority-low">Low</span>
+                                }
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

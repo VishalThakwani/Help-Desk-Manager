@@ -1,0 +1,112 @@
+﻿@model HelpDesk.Mvc.Models.Ticket
+
+@{
+    ViewData["Title"] = "Delete Ticket";
+}
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg border-0 rounded-4">
+
+        <div class="card-header bg-danger text-white py-3">
+
+            <h3 class="mb-0">
+                <i class="bi bi-trash3"></i>
+                Delete Ticket
+            </h3>
+
+        </div>
+
+        <div class="card-body p-5 text-center">
+
+            <div class="display-1 text-danger mb-3">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+            </div>
+
+            <h3 class="fw-bold mb-3">
+                Are you sure?
+            </h3>
+
+            <p class="text-muted mb-4">
+                This action will permanently delete this ticket.
+            </p>
+
+            <div class="card bg-light border-0 mb-4">
+
+                <div class="card-body">
+
+                    <h4 class="fw-bold">
+                        @Model.Title
+                    </h4>
+
+                    <p class="text-muted mb-2">
+                        @Model.Description
+                    </p>
+
+                    <span class="me-2">
+
+                        @if (Model.Priority == "High")
+                        {
+                            <span class="priority-high">High</span>
+                        }
+                        else if (Model.Priority == "Medium")
+                        {
+                            <span class="priority-medium">Medium</span>
+                        }
+                        else
+                        {
+                            <span class="priority-low">Low</span>
+                        }
+
+                    </span>
+
+                    <span>
+
+                        @if (Model.Status == "Open")
+                        {
+                            <span class="status-open">Open</span>
+                        }
+                        else
+                        {
+                            <span class="status-closed">Closed</span>
+                        }
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <form asp-action="Delete">
+
+                <input type="hidden" asp-for="Id" />
+
+                <div class="d-flex justify-content-center gap-3">
+
+                    <a asp-action="Index"
+                       class="btn btn-outline-secondary btn-lg">
+
+                        <i class="bi bi-arrow-left"></i>
+
+                        Cancel
+
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-danger btn-lg">
+
+                        <i class="bi bi-trash3"></i>
+
+                        Delete Ticket
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
